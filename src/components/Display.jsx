@@ -5,21 +5,22 @@ const Display = (props) => {
 
     
 
-    const changeHandler = (index) => {
+    const changeHandler = (e,item,index) => {
         const changeTodoList = todoList.map((item,idx) => {
             if(idx === index){
-                return {...item,checkbox:!item.checkbox}
+                const newTodo = {...item, checkbox:!item.checkbox};
+                return newTodo;
             }
             else{
-                return item
+                return item;
             }
         }
         )
         setTodoList(changeTodoList);
     }
-    const deleteHandler = (i) => {
+    const deleteHandler = (e,i) => {
         const filteredTodoList = todoList.filter((item,idx) => {
-            return idx!== i;
+            return idx !== i;
         })
         setTodoList(filteredTodoList)
          
@@ -37,7 +38,7 @@ return (
                 {(item.checkbox) ?
                 <p style={{textDecoration:'line-through'}}>{item.text}</p>
                 :(<p>{item.text}</p>)}
-                <button className="btn btn-danger" type="submit"onSubmit={(e) => deleteHandler(index)}>Delete</button>
+                <button className="btn btn-danger" type="submit"onClick={(e) => deleteHandler(e,index)}>Delete</button>
             </div>
         
             ))
